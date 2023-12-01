@@ -14,9 +14,13 @@ public:
     void runA(bool secondData=false);
     void runB();
     void report();
+    int ResultA() {return m_resultA;}
+    int ResultB() {return m_resultB;}
 private:
-    std::vector<int> m_data;
-    std::vector<int> m_bData;
+    std::string wordToInt(std::string);
+    int findFirstDigit(std::string);
+    int commonCalc(std::string);
+    std::vector<std::string> m_data;
     int m_resultA;
     int m_resultB;
 };
