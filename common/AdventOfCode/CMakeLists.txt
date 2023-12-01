@@ -1,7 +1,7 @@
 project("AdventOfCodeLib")
 
 
-add_library(${PROJECT_NAME} STATIC ../../2021/01/src/main.cpp)
+add_library(${PROJECT_NAME} STATIC )
 
 target_sources(${PROJECT_NAME}
     PRIVATE
