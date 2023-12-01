@@ -1,0 +1,3 @@
+#ifndef VERSIONINFO_H
+#define DAY_NAME "@PROJECT_NAME@"
+#endif  /* VERSIONINFO_H */
