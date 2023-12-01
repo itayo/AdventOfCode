@@ -1,4 +1,4 @@
-set(DAY 01)
+set(DAY 02)
 project("${YEAR}-${DAY}" DESCRIPTION "Advent of Code ${YEAR}-${DAY}")
 
 add_executable(${PROJECT_NAME} src/day.cpp src/day.h )

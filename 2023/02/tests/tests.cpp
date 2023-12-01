@@ -2,14 +2,14 @@
 #include <day.h>
 #include <aoc.h>
 
-TEST(day202301, PartOne) {
+TEST(day202302, PartOne) {
     AoC aoc;
     std::vector<std::string> input = aoc.ReadFile("testInput1.txt");
     Day day{input};
     day.runA();
     EXPECT_EQ(day.ResultA(), 142);
 }
-TEST(day202301, PartTwo) {
+TEST(day202302, PartTwo) {
     AoC aoc;
     std::vector<std::string> input = aoc.ReadFile("testInput2.txt");
     Day day{input};
