@@ -1,82 +1,89 @@
 #include <iostream>
 #include "day.h"
-#include <string>
 #include <algorithm>
 
-Day::Day(std::vector<std::string> data) : m_resultA(0), m_resultB(0), m_data(data) {
-}
+#define GAME_VS_DRAWS ':'
+#define DRAWS ':'
 
-struct dataField {
-    dataField(std::string word, std::string replace): m_word(word), m_replace(replace){   }
-    std::string m_word;
-    std::string m_replace;
-    std::vector<size_t> m_pos;
-};
-
-std::string Day::wordToInt(std::string data)
-{
-    std::vector<dataField> words;
-    std::vector<std::string> tmp = {"ZERO","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"};
-    for(uint i = 0; i< tmp.size();i++) {
-        words.push_back(dataField(tmp[i], std::to_string(i)));
-    }
-    std::transform(data.begin(), data.end(), data.begin(),[](unsigned char c){ return std::toupper(c); });
-    for(uint i=0; i < words.size(); i++) {
+std::string Day::CleanString(std::string line) {
+    std::vector<std::vector<std::string>> Cleans = {{": ", ":"},
+                                                    {", ", ","},
+                                                    {"; ", ";"}};
+    for (auto toClean: Cleans) {
         size_t pos = 0;
-        while ((pos = data.find(words[i].m_word, pos)) != std::string::npos) {
-            words[i].m_pos.push_back(pos);
-            pos++;
+        while ((pos = line.find(toClean[0])) != std::string::npos) {
+            line.replace(pos, toClean[0].length(), toClean[1]);
         }
     }
-    for(auto word : words) {
-        for(size_t p: word.m_pos) {
-            data.replace(p,1,word.m_replace);
+    return line;
+}
+
+void Day::PrepareGame(std::string line) {
+    tGame game;
+    auto gameStrings = aoc.StringSplit(line, ':');
+    game.id = std::stoi(aoc.StringSplit(gameStrings[0], ' ')[1]);
+    auto gameDraws = aoc.StringSplit(gameStrings[1], ';');
+    for (auto roundDraws: gameDraws) {
+        auto draws = aoc.StringSplit(roundDraws, ',');
+        int r = 0, g = 0, b = 0;
+        for (auto draw: draws) {
+            auto temp = aoc.StringSplit(draw, ' ');
+            switch (temp[1][0]) {
+                case 'r':
+                    r = std::stoi(temp[0]);
+                    break;
+                case 'g':
+                    g = std::stoi(temp[0]);
+                    break;
+                case 'b':
+                    b = std::stoi(temp[0]);
+                    break;
+            }
+        }
+        game.draws.push_back({r, g, b});
+    }
+    int r = 0, g = 0, b = 0;
+    for (auto draw: game.draws) {
+        game.maximum.red = game.maximum.red < draw.red ? draw.red : game.maximum.red;
+        game.maximum.green = game.maximum.green < draw.green ? draw.green : game.maximum.green;
+        game.maximum.blue = game.maximum.blue < draw.blue ? draw.blue : game.maximum.blue;
+    }
+    m_games.push_back(game);
+
+
+}
+
+
+void Day::PrepareData() {
+    for (size_t i = 0; i < m_data.size(); i++) {
+        m_data[i] = CleanString(m_data[i]);
+    }
+    for (std::string line: m_data) {
+        PrepareGame(line);
+    }
+    std::cout << "data prepped";
+}
+
+
+void Day::RunA(bool secondData) {
+    tDraw max{12, 13, 14};
+    m_resultA = 0;
+    for (auto game: m_games) {
+        if (game.maximum.red <= max.red && game.maximum.green <= max.green && game.maximum.blue <= max.blue) {
+            m_resultA += game.id;
         }
     }
-    return data;
 }
 
+void Day::RunB() {
+    m_resultB = 0;
+    for (auto game: m_games) {
+        m_resultB += game.maximum.red * game.maximum.green * game.maximum.blue;
+    }
 
-int Day::commonCalc(std::string data) {
-    std::string numbers;
-    std::string result;
-    for(char a :data) {
-        if (isdigit(a)) {
-            numbers += a;
-        }
-    }
-    if(numbers.length() == 1) {
-        result = numbers[0];
-        result+= numbers[0];
-    }
-    else if (numbers.length() == 0) {
-        return 0;
-    }
-    else {
-        result = numbers[0];
-        result += numbers.back();
-    }
-    return std::stoi(result);
 }
 
-void Day::runA(bool secondData) {
-
-    for(auto line: m_data)
-    {
-
-            m_resultA += commonCalc(line);
-    }
-}
-
-void Day::runB() {
-    for(auto line: m_data)
-    {
-        std::string data = wordToInt(line);
-        m_resultB += commonCalc(data);
-    }
-}
-
-void Day::report() {
+void Day::Report() {
     std::cout << "2021-01-1: " << m_resultA << std::endl;
     std::cout << "2021-01-2: " << m_resultB;
 }
