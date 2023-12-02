@@ -3,7 +3,7 @@
 #include <aoc.h>
 
 TEST(day202302, PartOne) {
-    AoC aoc;
+    AoC::AoC aoc;
     std::vector<std::string> input = aoc.ReadFile("testInput1.txt");
     Day day{input};
     day.PrepareData();
@@ -11,7 +11,7 @@ TEST(day202302, PartOne) {
     EXPECT_EQ(day.ResultA(), 8);
 }
 TEST(day202302, PartTwo) {
-    AoC aoc;
+    AoC::AoC aoc;
     std::vector<std::string> input = aoc.ReadFile("testInput2.txt");
     Day day{input};
     day.PrepareData();

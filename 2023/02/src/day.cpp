@@ -2,22 +2,6 @@
 #include "day.h"
 #include <algorithm>
 
-#define GAME_VS_DRAWS ':'
-#define DRAWS ':'
-
-std::string Day::CleanString(std::string line) {
-    std::vector<std::vector<std::string>> Cleans = {{": ", ":"},
-                                                    {", ", ","},
-                                                    {"; ", ";"}};
-    for (auto toClean: Cleans) {
-        size_t pos = 0;
-        while ((pos = line.find(toClean[0])) != std::string::npos) {
-            line.replace(pos, toClean[0].length(), toClean[1]);
-        }
-    }
-    return line;
-}
-
 void Day::PrepareGame(std::string line) {
     tGame game;
     auto gameStrings = aoc.StringSplit(line, ':');
@@ -55,9 +39,10 @@ void Day::PrepareGame(std::string line) {
 
 
 void Day::PrepareData() {
-    for (size_t i = 0; i < m_data.size(); i++) {
-        m_data[i] = CleanString(m_data[i]);
-    }
+    std::vector<AoC::tStringToReplace> Cleans = {{": ", ":"},
+                                                 {", ", ","},
+                                                 {"; ", ";"}};
+    aoc.StringReplace(m_data, Cleans);
     for (std::string line: m_data) {
         PrepareGame(line);
     }

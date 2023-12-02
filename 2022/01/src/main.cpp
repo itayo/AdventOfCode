@@ -5,7 +5,7 @@
 
 
 int main(int argc, char *argv[]) {
-    AoC aoc;
+    AoC::AoC aoc;
     std::vector<std::string> input = aoc.ReadFile("input.txt");
     Day day{input};
     day.runA();
