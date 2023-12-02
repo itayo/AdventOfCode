@@ -16,6 +16,6 @@ void Day::RunB() {
 }
 
 void Day::Report() {
-    std::cout << "2021-01-1: " << m_resultA << std::endl;
-    std::cout << "2021-01-2: " << m_resultB;
+    std::cout << "Part A: " << m_resultA << std::endl;
+    std::cout << "Part B: " << m_resultB;
 }

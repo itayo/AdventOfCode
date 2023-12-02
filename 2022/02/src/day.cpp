@@ -1,82 +1,83 @@
 #include <iostream>
 #include "day.h"
-#include <string>
 #include <algorithm>
 
-Day::Day(std::vector<std::string> data) : m_resultA(0), m_resultB(0), m_data(data) {
+void Day::PrepareData() {
+    for (std::string line: m_data) {
+        std::vector<std::string> lineData = aoc.StringSplit(line, ' ');
+        tGame game;
+        switch (lineData[0][0]) {
+            case 'A':
+                game.other = RPS::ROCK;
+                break;
+            case 'B':
+                game.other = RPS::PAPER;
+                break;
+            case 'C':
+                game.other = RPS::SCISSOR;
+                break;
+        }
+        game.me = lineData[1][0];
+        m_preparedData.push_back(game);
+    }
 }
 
-struct dataField {
-    dataField(std::string word, std::string replace): m_word(word), m_replace(replace){   }
-    std::string m_word;
-    std::string m_replace;
-    std::vector<size_t> m_pos;
-};
+int Day::DetermineWinner(RPS me, RPS other) {
+    if(me == other) return 3;
+    if(me == RPS::ROCK && other == RPS::SCISSOR) return 6;
+    if(me == RPS::SCISSOR && other == RPS::PAPER) return 6;
+    if(me == RPS::PAPER && other == RPS::ROCK) return 6;
+    return 0;
 
-std::string Day::wordToInt(std::string data)
-{
-    std::vector<dataField> words;
-    std::vector<std::string> tmp = {"ZERO","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"};
-    for(uint i = 0; i< tmp.size();i++) {
-        words.push_back(dataField(tmp[i], std::to_string(i)));
-    }
-    std::transform(data.begin(), data.end(), data.begin(),[](unsigned char c){ return std::toupper(c); });
-    for(uint i=0; i < words.size(); i++) {
-        size_t pos = 0;
-        while ((pos = data.find(words[i].m_word, pos)) != std::string::npos) {
-            words[i].m_pos.push_back(pos);
-            pos++;
-        }
-    }
-    for(auto word : words) {
-        for(size_t p: word.m_pos) {
-            data.replace(p,1,word.m_replace);
-        }
-    }
-    return data;
 }
 
-
-int Day::commonCalc(std::string data) {
-    std::string numbers;
-    std::string result;
-    for(char a :data) {
-        if (isdigit(a)) {
-            numbers += a;
-        }
-    }
-    if(numbers.length() == 1) {
-        result = numbers[0];
-        result+= numbers[0];
-    }
-    else if (numbers.length() == 0) {
-        return 0;
-    }
-    else {
-        result = numbers[0];
-        result += numbers.back();
-    }
-    return std::stoi(result);
-}
-
-void Day::runA(bool secondData) {
-
-    for(auto line: m_data)
+RPS Day::DetermineMyHand(RPS other, char outcome) {
+    RPS myHand;
+    switch(outcome)
     {
+        case 'X':
+            if(other == RPS::ROCK) return RPS::SCISSOR;
+            if(other == RPS::PAPER) return RPS::ROCK;
+            if(other == RPS::SCISSOR) return RPS::PAPER;
+            break;
+        case 'Z':
+            if(other == RPS::ROCK) return RPS::PAPER;
+            if(other == RPS::PAPER) return RPS::SCISSOR;
+            if(other == RPS::SCISSOR) return RPS::ROCK;
+            break;
+        default:
+            break;
+    }
+    return other;
+}
 
-            m_resultA += commonCalc(line);
+
+void Day::RunA(bool secondData) {
+    m_resultA = 0;
+    for(auto game: m_preparedData) {
+        switch(game.me) {
+            case 'X':
+                m_resultA += RPS::ROCK + DetermineWinner(RPS::ROCK, game.other);
+                break;
+            case 'Y':
+                m_resultA += RPS::PAPER + DetermineWinner(RPS::PAPER, game.other);
+                break;
+            case 'Z':
+                m_resultA += RPS::SCISSOR + DetermineWinner(RPS::SCISSOR, game.other);
+                break;
+        }
     }
 }
 
-void Day::runB() {
-    for(auto line: m_data)
-    {
-        std::string data = wordToInt(line);
-        m_resultB += commonCalc(data);
+void Day::RunB() {
+    for(auto game: m_preparedData) {
+           RPS myHand = DetermineMyHand(game.other, game.me);
+           m_resultB += myHand + DetermineWinner(myHand, game.other);
     }
+
 }
 
-void Day::report() {
-    std::cout << "2021-01-1: " << m_resultA << std::endl;
-    std::cout << "2021-01-2: " << m_resultB;
+void Day::Report() {
+    std::cout << "Part A: " << m_resultA << std::endl;
+    std::cout << "Part B: " << m_resultB;
 }

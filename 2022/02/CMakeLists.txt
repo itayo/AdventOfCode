@@ -26,7 +26,7 @@ target_sources(${PROJECT_NAME}
         PRIVATE
         src/main.cpp
         )
-#target_link_libraries(${PROJECT_NAME}-day PRIVATE AdventOfCodeLib)
+target_link_libraries(${PROJECT_NAME}-day PRIVATE AdventOfCodeLib)
 target_link_libraries(${PROJECT_NAME} PRIVATE AdventOfCodeLib ${PROJECT_NAME}-day)
 target_include_directories(${PROJECT_NAME}
         PRIVATE
