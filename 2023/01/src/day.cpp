@@ -17,11 +17,11 @@ std::string Day::wordToInt(std::string data)
 {
     std::vector<dataField> words;
     std::vector<std::string> tmp = {"ZERO","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"};
-    for(uint i = 0; i< tmp.size();i++) {
+    for(size_t i = 0; i< tmp.size();i++) {
         words.push_back(dataField(tmp[i], std::to_string(i)));
     }
     std::transform(data.begin(), data.end(), data.begin(),[](unsigned char c){ return std::toupper(c); });
-    for(uint i=0; i < words.size(); i++) {
+    for(size_t i=0; i < words.size(); i++) {
         size_t pos = 0;
         while ((pos = data.find(words[i].m_word, pos)) != std::string::npos) {
             words[i].m_pos.push_back(pos);
