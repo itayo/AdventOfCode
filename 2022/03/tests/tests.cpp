@@ -2,19 +2,19 @@
 #include <day.h>
 #include <aoc.h>
 
-TEST(day202303, PartOne) {
+TEST(day202202, PartOne) {
     AoC::AoC aoc;
     std::vector<std::string> input = aoc.ReadFile("testInput1.txt");
     Day day{input};
     day.PrepareData();
     day.RunA();
-    EXPECT_EQ(day.ResultA(), 4361);
+    EXPECT_EQ(day.ResultA(), 157);
 }
-TEST(day202303, PartTwo) {
+TEST(day202202, PartTwo) {
     AoC::AoC aoc;
     std::vector<std::string> input = aoc.ReadFile("testInput2.txt");
     Day day{input};
     day.PrepareData();
     day.RunB();
-    EXPECT_EQ(day.ResultB(), 2286);
+    EXPECT_EQ(day.ResultB(), 12);
 }

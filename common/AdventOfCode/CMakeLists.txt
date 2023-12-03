@@ -1,13 +1,15 @@
 project("AdventOfCodeLib")
 
 
-add_library(${PROJECT_NAME} STATIC )
+add_library(${PROJECT_NAME} STATIC)
 
 target_sources(${PROJECT_NAME}
     PRIVATE
         src/aoc.cpp
         inc/aoc.h
+        inc/Grid2D.h
 )
+
 target_include_directories(${PROJECT_NAME}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
