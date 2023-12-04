@@ -16,7 +16,8 @@ public:
 private:
     AoC::AoC aoc;
     std::vector<std::string> m_data;
-    std::vector<std::array<std::string,2>> m_formattedData;
+    std::vector<std::array<std::string,2>> m_formattedDataA;
+    std::vector<std::array<std::string,3>> m_formattedDataB;
     int m_resultA;
     int m_resultB;
 };

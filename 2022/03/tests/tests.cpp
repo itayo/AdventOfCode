@@ -16,5 +16,5 @@ TEST(day202203, PartTwo) {
     Day day{input};
     day.PrepareData();
     day.RunB();
-    EXPECT_EQ(day.ResultB(), 12);
+    EXPECT_EQ(day.ResultB(), 70);
 }
