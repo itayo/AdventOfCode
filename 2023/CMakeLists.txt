@@ -1,4 +1,5 @@
 set(YEAR 2023)
 add_subdirectory(01)
 add_subdirectory(02)
-add_subdirectory(03)
+#add_subdirectory(03) - day3 is a WIP, never got it right
+add_subdirectory(04)
