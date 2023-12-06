@@ -4,3 +4,4 @@ add_subdirectory(02)
 #add_subdirectory(03) - day3 is a WIP, never got it right
 add_subdirectory(04)
 add_subdirectory(05)
+add_subdirectory(06)
