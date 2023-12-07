@@ -18,3 +18,14 @@ TEST(day202302, PartTwo) {
     day.RunB();
     EXPECT_EQ(day.ResultB(), 2286);
 }
+
+TEST(day202302, MyRealData) {
+  AoC::AoC aoc;
+  std::vector<std::string> input = aoc.ReadFile("../input.txt");
+  Day day{input};
+  day.PrepareData();
+  day.RunA();
+  day.RunB();
+  EXPECT_EQ(day.ResultA(), 2331);
+  EXPECT_EQ(day.ResultB(), 71585);
+}
