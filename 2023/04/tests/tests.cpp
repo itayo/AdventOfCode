@@ -21,7 +21,6 @@ TEST(day202304, PartTwo) {
 
 TEST(day202304, MyRealData) {
 
-  GTEST_SKIP() << "Skipped due to execution time";
   AoC::AoC aoc;
   std::vector<std::string> input = aoc.ReadFile("../input.txt");
   Day day{input};
