@@ -17,7 +17,7 @@ std::vector<std::string> AoC::ReadFile(std::string file_path) {
   return v;
 }
 
-std::vector<std::string> AoC::StringSplit(std::string &line, char delimiter) {
+std::vector<std::string> AoC::StringSplit(const std::string &line, char delimiter) {
   std::string part;
   std::vector<std::string> result;
   std::stringstream stream(line);

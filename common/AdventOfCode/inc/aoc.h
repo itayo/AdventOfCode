@@ -19,7 +19,7 @@ namespace AoC {
         template<typename tType>
         void Unused(tType type) { UNUSED(type);}
 
-        std::vector<std::string> StringSplit(std::string& line, char delimiter);
+        std::vector<std::string> StringSplit(const std::string& line, char delimiter);
         void StringReplace(std::string& string, std::vector<tStringToReplace> replacers);
         void StringReplace(std::vector<std::string>& strings, std::vector<tStringToReplace> replacers);
         std::vector<int> GetAllIntegersS32(std::string line);
