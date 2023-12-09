@@ -7,7 +7,7 @@ target_sources(${PROJECT_NAME}
     PRIVATE
         src/aoc.cpp
         inc/aoc.h
-        inc/Grid2D.h
+        inc/Assertion.h
 )
 
 target_include_directories(${PROJECT_NAME}

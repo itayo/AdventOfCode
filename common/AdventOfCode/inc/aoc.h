@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <regex>
+#include "../inc/Assertion.h"
 namespace AoC {
 #define UNUSED(x)  (void)((x))
     struct tStringToReplace {
