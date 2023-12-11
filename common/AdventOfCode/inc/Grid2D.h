@@ -54,6 +54,15 @@ namespace AoC {
             }
         }
 
+        Vector2D IndexToLocation(int index)
+        {
+            return {index%m_columns,index/m_columns};
+        }
+
+        int Vector2DToLocation(Vector2D vector) {
+            return vector.Y()* m_rows + vector.X();
+        }
+
         void Set(int p_row, int p_column, tType p_value) {
             if (Exists(p_row, p_column)) {
                 m_cells[(m_columns * p_row) + p_column] = p_value;
@@ -109,6 +118,17 @@ namespace AoC {
             ExitOnAssertFail((index < m_cells.size()));
             return(Vector2D{index%m_columns,index/m_columns});
 
+        }
+        std::vector<Vector2D> FindAllLocationsOf(tType p_what) {
+            std::vector<Vector2D> locations;
+            auto it = m_cells.begin();
+            while ((it = std::find_if(it, m_cells.end(), [p_what](char c){return c == p_what;})) != m_cells.end())
+            {
+                int index = std::distance(m_cells.begin(), it);
+                locations.emplace_back(IndexToLocation(index));
+                it++;
+            }
+            return locations;
         }
 
     private:

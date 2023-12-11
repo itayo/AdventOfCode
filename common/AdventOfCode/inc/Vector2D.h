@@ -59,6 +59,15 @@ namespace AoC {
         void Print() {
             std::cout << "X=" << m_x << " Y=" << m_y << " Facing=" << m_facing << std::endl;
         }
+        std::string Cord()
+        {
+            std::string ret = "(";
+            ret += std::to_string(m_x);
+            ret += ",";
+            ret += std::to_string(m_y);
+            ret += ")";
+            return ret;
+        }
 
     private:
         tFacing m_facing = tFacing::NORTH;
