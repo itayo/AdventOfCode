@@ -8,6 +8,8 @@ target_sources(${PROJECT_NAME}
         src/aoc.cpp
         inc/aoc.h
         inc/Assertion.h
+        inc/Grid2D.h
+        inc/Vector2D.h
 )
 
 target_include_directories(${PROJECT_NAME}

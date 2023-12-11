@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "position.h"
+#include "Vector2D.h"
 #include "Assertion.h"
 
 namespace AoC {
@@ -34,7 +34,7 @@ namespace AoC {
                     p_row >= 0 && p_column >= 0;
         }
 
-        bool Exists(position p_position) { return Exists(p_position.X(), p_position.Y()); }
+        bool Exists(Vector2D p_position) { return Exists(p_position.Y(), p_position.X()); }
 
         tType Get(int p_row, int p_column) {
             if (Exists(p_row, p_column)) {
@@ -43,31 +43,21 @@ namespace AoC {
             return tType();
         }
 
-        tType Get(position p_position) { return Get(p_position.X(), p_position.Y()); }
+        tType Get(Vector2D p_position) { return Get(p_position.Y(), p_position.X()); }
 
-        void Reset(std::vector<std::string> p_defaultData) {
+        void Reset(int p_row, int p_columns) {
             m_cells.clear();
-            m_rows = p_defaultData.size();
-            m_columns = p_defaultData[0].size();
-            for (std::string row: p_defaultData) {
-                for (char character: row)
-                    m_cells.template emplace_back(character);
+            m_rows = p_row;
+            m_columns = p_columns;
+            for(int i=0 ; i < m_rows*m_columns;++i) {
+                m_cells.push_back(tType());
             }
-        }
-
-        void Resize(int p_rows, int p_columns) {
-            Grid2D<tType> grid(p_rows, p_columns);
-            *this = std::move(grid);
         }
 
         void Set(int p_row, int p_column, tType p_value) {
             if (Exists(p_row, p_column)) {
                 m_cells[(m_columns * p_row) + p_column] = p_value;
             }
-        }
-
-        void Set(position p_position, tType p_value) {
-            Set(p_position.X(), p_position.Y(), p_value);
         }
 
         void SetAll(tType value) {
@@ -93,19 +83,38 @@ namespace AoC {
         }
 
         void Print() {
-            for(int row = 0; row < m_rows; ++row) {
-                for(int cols =0 ; cols < m_columns;++cols)
-                {
-                    std::cout << Get(row,cols);
+            for (int row = 0; row < m_rows; ++row) {
+                for (int cols = 0; cols < m_columns; ++cols) {
+                    std::cout << Get(row, cols);
                 }
                 std::cout << std::endl;
             }
+
+        }
+        template<typename tPrintType>
+        void Print() {
+            for (int row = 0; row < m_rows; ++row) {
+                for (int cols = 0; cols < m_columns; ++cols) {
+                    std::cout << tPrintType(Get(row, cols));
+                }
+                std::cout << std::endl;
+            }
+
+        }
+        Vector2D FindPos(tType p_what) {
+            auto it=std::find(m_cells.begin(), m_cells.end(), p_what);
+            if(it==m_cells.end())
+                ExitIfReached();
+            int index=std::distance(m_cells.begin(), it);
+            ExitOnAssertFail((index < m_cells.size()));
+            return(Vector2D{index%m_columns,index/m_columns});
 
         }
 
     private:
         int m_rows = 0;
         int m_columns = 0;
+
         std::vector<tType> m_cells;
     };
 }
