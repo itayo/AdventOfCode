@@ -1,9 +1,9 @@
 #ifndef ADVENTOFCODE_DAY_H
 #define ADVENTOFCODE_DAY_H
 
-#include <aoc.h>
+#include "AoC/aoc.h"
 #include <list>
-#include "Grid2D.h"
+#include "AoC/Grid2D.h"
 template <typename T>
 bool IsInBounds(const T& value, const T& a, const T& b) {
     return !(value < std::min(a,b)) && (value < std::max(a,b));

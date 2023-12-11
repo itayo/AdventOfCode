@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <day.h>
-#include <aoc.h>
+#include "AoC/aoc.h"
 
 TEST(day202202, PartOne) {
     AoC::AoC aoc;

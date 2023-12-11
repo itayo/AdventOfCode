@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <day.h>
-#include <aoc.h>
+#include "AoC/aoc.h"
 struct tTestCase {
   tTestCase(int e, std::vector<std::string> d) : expected(e), testdata(d) {}
   const int expected;

@@ -2,10 +2,10 @@
 #define ADVENTOFCODE_DAY_H
 
 #include <vector>
-#include <aoc.h>
+#include "AoC/aoc.h"
 #include <string>
 #include <regex>
-#include "Grid2D.h"
+#include "AoC/Grid2D.h"
 struct tRace {
     tRace(){}
     tRace(uint32_t t, uint32_t d) :time(t), distance(d){}

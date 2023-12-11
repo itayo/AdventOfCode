@@ -6,10 +6,10 @@ add_library(${PROJECT_NAME} STATIC)
 target_sources(${PROJECT_NAME}
     PRIVATE
         src/aoc.cpp
-        inc/aoc.h
-        inc/Assertion.h
-        inc/Grid2D.h
-        inc/Vector2D.h
+        inc/AoC/aoc.h
+        inc/AoC/Assertion.h
+        inc/AoC/Grid2D.h
+        inc/AoC/Vector2D.h
 )
 
 target_include_directories(${PROJECT_NAME}

@@ -1,7 +1,7 @@
 #ifndef ADVENTOFCODE_DAY_H
 #define ADVENTOFCODE_DAY_H
 #include <vector>
-#include <aoc.h>
+#include "AoC/aoc.h"
 #include <array>
 
 class Day {

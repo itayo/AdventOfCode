@@ -1,4 +1,4 @@
-#include "aoc.h"
+#include "AoC/aoc.h"
 #include <string>
 #include <vector>
 #include "day.h"

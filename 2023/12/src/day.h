@@ -3,10 +3,11 @@
 
 #include "AoC/aoc.h"
 #include <list>
-
+#include "AoC/Grid2D.h"
 
 class Day {
 public:
+
     Day(std::vector<std::string> data)
             : m_resultA(0), m_resultB(0), m_data(data) {
     }
@@ -23,12 +24,10 @@ public:
 
     uint64_t ResultB() { return m_resultB; }
 
-private:
-    int CalculateSequence(const std::vector<int> &numbers, bool backwards = false);
 
+private:
     AoC::AoC aoc;
     const std::vector<std::string> m_data;
-    std::vector<std::vector<int>> m_sequence;
     uint64_t m_resultA;
     uint64_t m_resultB;
     int m_lr = 0;

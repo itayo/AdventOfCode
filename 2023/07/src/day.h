@@ -1,7 +1,7 @@
 #ifndef ADVENTOFCODE_DAY_H
 #define ADVENTOFCODE_DAY_H
-#include <aoc.h>
-#include "Grid2D.h"
+#include "AoC/aoc.h"
+#include "AoC/Grid2D.h"
 enum HandRank {
   HiCard = 1,
   OnePair = 2,

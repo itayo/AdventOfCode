@@ -1,6 +1,6 @@
 #include <iostream>
 #include "day.h"
-#include <Assertion.h>
+#include "AoC/Assertion.h"
 
 
 void Day::PrepareData() {

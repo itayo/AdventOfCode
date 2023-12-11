@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <regex>
-#include "../inc/aoc.h"
+#include "AoC/aoc.h"
 
 namespace AoC {
 std::vector<std::string> AoC::ReadFile(std::string file_path) {
