@@ -103,11 +103,11 @@ void Day::RunB()
         m_seedsB.emplace_back(tmp.from+half, tmp.range-half);
     }
     std::sort(m_seedsB.begin(), m_seedsB.end(), SeedRanges::compareByRangeAsc);
-    std::vector<std::promise<uint64_t>> promieses(m_seedsB.size());
+    std::vector<std::promise<uint64_t>> promises(m_seedsB.size());
     std::vector<std::future<uint64_t>> results(m_seedsB.size());
     for (size_t pos = 0; pos<m_seedsB.size(); ++pos) {
-        results[pos] = promieses[pos].get_future();
-        threads.emplace_back(&TraverseRange, std::move(promieses[pos]), m_seedsB[pos], m_maps, pos);
+        results[pos] = promises[pos].get_future();
+        threads.emplace_back(&TraverseRange, std::move(promises[pos]), m_seedsB[pos], m_maps, pos);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
     auto threadC = threads.size();
