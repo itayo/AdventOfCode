@@ -44,7 +44,7 @@ void Day::PrepareData()
                     currMap.maps.emplace_back(entry);
                     data.erase(data.begin());
                 }
-                m_maps.emplace_back(currMap);
+                m_mapsA.emplace_back(currMap);
             }
         }
     }
@@ -84,7 +84,7 @@ void Day::RunA(bool secondData)
     m_resultA = std::numeric_limits<uint64_t>::max();
     for (uint64_t location: m_seedsA) {
 
-        m_resultA = std::min(Traverse(location, m_maps), m_resultA);
+        m_resultA = std::min(Traverse(location, m_mapsA), m_resultA);
     }
     return;
 }
@@ -107,7 +107,7 @@ void Day::RunB()
     std::vector<std::future<uint64_t>> results(m_seedsB.size());
     for (size_t pos = 0; pos<m_seedsB.size(); ++pos) {
         results[pos] = promises[pos].get_future();
-        threads.emplace_back(&TraverseRange, std::move(promises[pos]), m_seedsB[pos], m_maps, pos);
+        threads.emplace_back(&TraverseRange, std::move(promises[pos]), m_seedsB[pos], m_mapsA, pos);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
     auto threadC = threads.size();

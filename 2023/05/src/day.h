@@ -51,7 +51,7 @@ private:
     std::vector<std::string> m_data;
     std::vector<uint64_t> m_seedsA;
     std::vector<SeedRanges> m_seedsB;
-    std::vector<Map> m_maps;
+    std::vector<Map> m_mapsA;
 
     uint64_t m_resultA;
     uint64_t m_resultB;

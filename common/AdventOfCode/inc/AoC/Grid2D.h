@@ -45,22 +45,50 @@ namespace AoC {
 
         tType Get(Vector2D p_position) { return Get(p_position.Y(), p_position.X()); }
 
+        std::string GetColumnAsString(int column) {
+            std::string result ="";
+            for(int i=0; i< m_rows;++i)
+            {
+                result += Get(i,column);
+            }
+            return result;
+        }
+
+        std::string GetRowAsString(int row) {
+                std::string result ="";
+                for(int i=0; i< m_rows;++i)
+                {
+                    result += Get(row,i);
+                }
+                return result;
+
+        }
+
+        std::string GetSectorAsString(Vector2D start, Vector2D stop) {
+            std::string result = "";
+            for (int row = start.Y(); row <= stop.Y(); ++row) {
+                for (int column = start.X(); column <= stop.X(); ++column) {
+                    result += Get(row, column);
+                }
+            }
+            return result;
+        }
+
         void Reset(int p_row, int p_columns) {
             m_cells.clear();
             m_rows = p_row;
             m_columns = p_columns;
-            for(int i=0 ; i < m_rows*m_columns;++i) {
+            for (int i = 0; i < m_rows * m_columns; ++i) {
                 m_cells.push_back(tType());
             }
         }
 
-        Vector2D IndexToLocation(int index)
-        {
-            return {index%m_columns,index/m_columns};
+        Vector2D IndexToLocation(int index) {
+            return {index % m_columns, index / m_columns};
         }
 
         int Vector2DToLocation(Vector2D vector) {
-            return vector.Y()* m_rows + vector.X();
+            return vector.Y() * m_rows + vector.X();
         }
 
         void Set(int p_row, int p_column, tType p_value) {
@@ -100,6 +128,7 @@ namespace AoC {
             }
 
         }
+
         template<typename tPrintType>
         void Print() {
             for (int row = 0; row < m_rows; ++row) {
@@ -110,20 +139,20 @@ namespace AoC {
             }
 
         }
+
         Vector2D FindPos(tType p_what) {
-            auto it=std::find(m_cells.begin(), m_cells.end(), p_what);
-            if(it==m_cells.end())
-                ExitIfReached();
-            int index=std::distance(m_cells.begin(), it);
+            auto it = std::find(m_cells.begin(), m_cells.end(), p_what);
+            if (it == m_cells.end()) ExitIfReached();
+            int index = std::distance(m_cells.begin(), it);
             ExitOnAssertFail((index < m_cells.size()));
-            return(Vector2D{index%m_columns,index/m_columns});
+            return (Vector2D{index % m_columns, index / m_columns});
 
         }
+
         std::vector<Vector2D> FindAllLocationsOf(tType p_what) {
             std::vector<Vector2D> locations;
             auto it = m_cells.begin();
-            while ((it = std::find_if(it, m_cells.end(), [p_what](char c){return c == p_what;})) != m_cells.end())
-            {
+            while ((it = std::find_if(it, m_cells.end(), [p_what](char c) { return c == p_what; })) != m_cells.end()) {
                 int index = std::distance(m_cells.begin(), it);
                 locations.emplace_back(IndexToLocation(index));
                 it++;
