@@ -45,6 +45,15 @@ namespace AoC {
 
         tType Get(Vector2D p_position) { return Get(p_position.Y(), p_position.X()); }
 
+        tType operator[](Vector2D v) const
+        {
+            return Get(v.Y(),v.X());
+        }
+
+        tType operator[](std::pair<int,int> index) {
+            return(Get(index.second,index.first));
+        }
+
         std::string GetColumnAsString(int column) {
             std::string result ="";
             for(int i=0; i< m_rows;++i)

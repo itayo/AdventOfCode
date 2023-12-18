@@ -65,6 +65,10 @@ namespace AoC {
             ret += std::to_string(m_x);
             ret += ",";
             ret += std::to_string(m_y);
+            if(facing) {
+                ret += ",";
+                ret += std::to_string(m_facing);
+            }
             ret += ")";
             return ret;
         }
