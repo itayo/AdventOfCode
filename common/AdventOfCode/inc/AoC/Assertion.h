@@ -21,6 +21,11 @@ TestOrExitBase(assert,#assert,__FILE__,__LINE__); \
 {                            \
 TestOrExitBase(false,"Should not reach",__FILE__,__LINE__); \
 }
+
+#define ExitIfReachedWithMessage(s) \
+{                            \
+TestOrExitBase(false,"Should not reach!!! " + s,__FILE__,__LINE__); \
+}
 }
 
 #endif //ADVENTOFCODE_ASSERTION_H

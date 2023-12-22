@@ -3,6 +3,7 @@
 
 #include "AoC/aoc.h"
 #include <vector>
+#include <unordered_map>
 #include <string>
 
 enum tCommand {

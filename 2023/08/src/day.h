@@ -2,6 +2,7 @@
 #define ADVENTOFCODE_DAY_H
 #include "AoC/aoc.h"
 #include <list>
+#include <unordered_map>
 #include "AoC/Grid2D.h"
 enum Dir {
   LEFT = 0,
@@ -35,7 +36,7 @@ class Day {
  private:
   void Move(std::string &,bool increase=true);
   AoC::AoC aoc;
-  std::unordered_map<std::string,std::vector<std::string>> m_map;
+  std::unordered_map<std::string,std::vector<std::string>> m_mapA;
   std::vector<std::string> m_locationsB;
   const std::vector<std::string> m_data;
   std::vector<Dir> m_dir;

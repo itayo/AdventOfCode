@@ -15,7 +15,7 @@ void Day::PrepareData() {
   std::regex rx("^([A-Z1-9]{3}) = \\(([A-Z1-9]{3}), ([A-Z1-9]{3})\\)$");
   for (size_t i = 2; i < m_data.size(); ++i) {
     auto matches = aoc.ExtractMatches(rx, m_data[i]);
-    m_map[matches[0]] = {matches[1], matches[2]};
+      m_mapA[matches[0]] = {matches[1], matches[2]};
     if (aoc.StringEndsWith(matches[0], "A")) {
       m_locationsB.push_back(matches[0]);
     }
@@ -24,7 +24,7 @@ void Day::PrepareData() {
 
 void Day::Move(std::string &string, bool increase) {
   if (m_lr == m_dir.size()) { m_lr = 0; }
-  string = m_map[string][m_dir[m_lr]];
+  string = m_mapA[string][m_dir[m_lr]];
   if (increase) {
     m_lr++;
     if (m_lr == m_dir.size()) { m_lr = 0; }
